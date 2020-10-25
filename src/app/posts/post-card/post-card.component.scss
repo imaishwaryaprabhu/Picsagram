@@ -1,0 +1,20 @@
+.post {
+    position: relative;
+}
+
+.post-action-btn {
+    z-index: 100;
+    right: 0;
+    top: 18px;
+    position: absolute;
+}
+
+.post-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.post-actions {
+    display: flex;
+}
+ 

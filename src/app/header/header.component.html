@@ -1,0 +1,15 @@
+<div class="main-header">
+  <mat-toolbar color="primary">
+    <span>Picsagram</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item><mat-icon>person_outline</mat-icon>Profile</button>
+      <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>Log Out</button>
+    </mat-menu>
+  </mat-toolbar>
+</div>

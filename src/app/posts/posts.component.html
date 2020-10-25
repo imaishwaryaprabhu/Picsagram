@@ -1,0 +1,13 @@
+<!-- New Post -->
+<div style="padding: 1rem 0;">
+    <button mat-fab matTooltip="Add Post" matTooltipPosition="after" (click)="openNewDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<!-- Posts -->
+<mat-grid-list cols="1" rowHeight="23:25" gutterSize="5rem">
+    <mat-grid-tile>
+        <post-card></post-card>
+    </mat-grid-tile>
+</mat-grid-list>

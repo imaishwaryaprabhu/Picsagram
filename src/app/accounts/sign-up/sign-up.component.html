@@ -1,0 +1,88 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h3>
+                    Sign up to see photos and videos from your friends.
+                </h3>
+            </mat-card-title>
+        </mat-card-header>
+        <form (ngSubmit)="onSignUp(signUpForm)" #signUpForm="ngForm">
+            <mat-card-content class="signup-form">
+                <mat-form-field>
+                    <input matInput placeholder="Email Address" 
+                    name="email" 
+                    ngModel 
+                    #email="ngModel"
+                    email 
+                    required>
+                    <mat-error *ngIf="signUpForm.submitted && email.invalid">
+                        <ng-container *ngIf="email.errors.required">Required</ng-container>
+                        <ng-container *ngIf="email.errors.email">Enter a valid Email ID</ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="First Name" 
+                    name="firstname" 
+                    ngModel 
+                    #firstname="ngModel" 
+                    required
+                    minlength="5"
+                    maxlength="20">
+                    <mat-error *ngIf="signUpForm.submitted && firstname.invalid">
+                        <ng-container *ngIf="firstname.errors.required">Required</ng-container>
+                        <ng-container *ngIf="firstname.errors.minlength">First name should be atleast {{ firstname.errors.minlength.requiredLength }} characters</ng-container>
+                        <ng-container *ngIf="firstname.errors.maxlength">First name should be max {{ firstname.errors.maxlength.requiredLength }} characters</ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Last Name" 
+                    name="lastname" 
+                    ngModel 
+                    #lastname="ngModel"
+                    required
+                    minlength="5"
+                    maxlength="20">
+                    <mat-error *ngIf="signUpForm.submitted && lastname.invalid">
+                        <ng-container *ngIf="lastname.errors.required">Required</ng-container>
+                        <ng-container *ngIf="lastname.errors.minlength">Last name should be atleast {{ lastname.errors.minlength.requiredLength }} characters</ng-container>
+                        <ng-container *ngIf="lastname.errors.maxlength">Last name should be max {{ lastname.errors.maxlength.requiredLength }} characters</ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Username" 
+                    name="username" 
+                    ngModel 
+                    #username="ngModel"
+                    minlength="5"
+                    maxlength="20">
+                    <mat-error *ngIf="signUpForm.submitted && username.invalid">
+                        <ng-container *ngIf="username.errors.required">Required</ng-container>
+                        <ng-container *ngIf="username.errors.minlength">Username should be atleast {{ username.errors.minlength.requiredLength }} characters</ng-container>
+                        <ng-container *ngIf="username.errors.maxlength">Username should be max {{ username.errors.maxlength.requiredLength }} characters</ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" 
+                    name="password" 
+                    ngModel 
+                    #password="ngModel"
+                    minlength="8"
+                    maxlength="16">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="signUpForm.submitted && password.invalid">
+                        <ng-container *ngIf="password.errors.required">Required</ng-container>
+                        <ng-container *ngIf="password.errors.minlength">First name should be atleast {{ password.errors.minlength.requiredLength }} characters</ng-container>
+                        <ng-container *ngIf="password.errors.maxlength">First name should be max {{ password.errors.maxlength.requiredLength }} characters</ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <button color="primary" mat-raised-button type="submit">Sign up</button>
+            </mat-card-content>
+        </form>
+    </mat-card>
+    <mat-card>
+        <p>Have an account? <a routerLink="/accounts/signin">Sign in</a></p>
+    </mat-card>
+</div>

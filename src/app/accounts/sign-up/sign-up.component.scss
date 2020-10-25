@@ -1,0 +1,26 @@
+.form-container {
+    text-align: center;
+    padding: 0 1rem;
+    margin: auto;
+    margin-top: 1rem;
+    width: 100%;
+    
+    @media (min-width: 426px) {
+      max-width: 50%;
+      margin-top: 5rem;
+    }
+}
+
+mat-card:last-child {
+    margin-top: 1rem;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form > * {
+    width: 100%;
+    margin: 5px 0;
+}

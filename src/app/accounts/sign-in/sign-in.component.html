@@ -1,0 +1,33 @@
+<div class="form-container">
+    <mat-card>
+        <form #signInForm="ngForm" (ngSubmit)="onSignIn(signInForm)">
+            <mat-card-content class="login-form">
+                <mat-form-field>
+                    <input matInput placeholder="Enter your email" 
+                    name="email" 
+                    ngModel
+                    #email="ngModel"
+                    email 
+                    required>
+                    <mat-error *ngIf="email.invalid">Enter a valid email ID</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" 
+                    name="password" 
+                    ngModel 
+                    #password="ngModel" 
+                    required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.invalid">Enter a valid password</mat-error>
+                </mat-form-field>
+                <button color="primary" mat-raised-button type="submit" [disabled]="signInForm.invalid">Sign in</button>
+            </mat-card-content>
+        </form>
+    </mat-card>
+    <mat-card>
+        <p>Don't have an account? <a routerLink="/accounts/signup">Sign up</a></p>
+    </mat-card>
+</div>
+  

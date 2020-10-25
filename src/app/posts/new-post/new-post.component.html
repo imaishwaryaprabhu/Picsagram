@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>New Post</h2>
+<mat-dialog-content class="mat-typography">
+  <form>
+    <mat-vertical-stepper linear #stepper>
+      <mat-step [stepControl]="">
+        <ng-template matStepLabel>Upload Image</ng-template>
+        <ng-template [ngIf]="!imageChangedEvent && !croppedImage">
+          <button mat-raised-button class="btn-upload" type="button" (click)="fileInput.click()">Choose Image</button>
+          <input type="file" accept="image/png, image/jpeg, image/jpg" (change)="fileChangeEvent($event)" #fileInput>
+        </ng-template>
+        <div class="image-cropper" *ngIf="imageChangedEvent">
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="5 / 4"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+          <button mat-button class="btn-crop" (click)="cropImage()">
+            <mat-icon>crop</mat-icon>
+          </button>
+        </div>    
+        <ng-template [ngIf]="!imageChangedEvent && croppedImage">
+          <img [src]="croppedImage" class="cropped-image" />
+          <button mat-button class="btn-crop" (click)="deleteImage()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </ng-template>
+        <div>
+          <button mat-button matStepperNext type="button" >Next</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="">
+        <ng-template matStepLabel>Preview</ng-template>
+        <img [src]="croppedImage" class="preview-image" />
+        <mat-form-field>
+          <textarea matInput placeholder="Write a caption..." rows="2"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious  type="button">Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div>
+          <button mat-mini-fab class="btn-success"><mat-icon>done</mat-icon></button>
+          <p style="text-align: center;">Post uploaded sucessfully!!</p>
+          <button mat-mini-fab class="btn-error"><mat-icon>close</mat-icon></button>
+          <p style="text-align: center;">Failed! Please try after some time</p>
+        </div>
+        <!-- <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div> -->
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions> -->

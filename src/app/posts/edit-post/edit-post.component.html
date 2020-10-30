@@ -1,13 +1,14 @@
-<h2 mat-dialog-title>Edit Caption</h2>
-<mat-dialog-content class="mat-typography">
-  <form>
-    <img [src]="" class="preview-image" />
+<h2 mat-dialog-title>Edit Post</h2>
+<form #editForm="ngForm" (ngSubmit)="onUpdate()">
+  <mat-dialog-content class="mat-typography" class="edit-form">
+    <img [src]="data.post.imagePath" class="preview-image" />
     <mat-form-field>
-      <textarea matInput placeholder="Write a caption..." rows="2"></textarea>
+      <textarea matTextareaAutosize matInput placeholder="Write a caption..." rows="2" name="caption" #caption="ngModel" ngModel required></textarea>
     </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Update</button>
-</mat-dialog-actions>
+    <mat-error></mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" cdkFocusInitial>Update</button>
+  </mat-dialog-actions>
+</form>

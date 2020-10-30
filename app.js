@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/images/posts", express.static(__dirname + "backend/images/posts"));
+app.use("/images/posts", express.static(__dirname + "/backend/images/posts"));
 app.use("/api/posts", postsRoutes);
 app.use("/api/users", userRoutes);
 

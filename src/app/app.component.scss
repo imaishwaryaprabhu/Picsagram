@@ -2,7 +2,12 @@ main {
     padding: 1.5rem 0;
     width: 100%;
 
-    @media (min-width: 1025px) {
+    @media (min-width: 428px) {
+        width: calc(100vw - 200px);
+        margin: auto;
+    }
+
+    @media (min-width: 769px) {
         width: 50%;
         margin: auto;
     }

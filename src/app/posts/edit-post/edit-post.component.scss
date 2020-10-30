@@ -1,0 +1,10 @@
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+}
+
+.edit-form > img {
+    max-width: 50%;
+    margin-bottom: 2rem;
+}

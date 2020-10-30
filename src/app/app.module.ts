@@ -16,6 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignInComponent } from './accounts/sign-in/sign-in.component';
 import { SignUpComponent } from './accounts/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './accounts/auth.interceptor';
+import { ErrorInterceptor } from './error/error.interceptor';
+import { ErrorComponent } from './error/error.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FooterComponent,
     SignInComponent,
     SignUpComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +43,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ReactiveFormsModule,
     ImageCropperModule,
     AppMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

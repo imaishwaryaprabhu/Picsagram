@@ -13,7 +13,11 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MAT_SNACK_BAR_DEFAULT_OPTIONS,
   } from '@angular/material';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @NgModule({
     imports: [
@@ -29,7 +33,9 @@ import {
         MatFormFieldModule,
         MatInputModule,
         MatMenuModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     exports: [
         MatToolbarModule,
@@ -44,8 +50,13 @@ import {
         MatFormFieldModule,
         MatInputModule,
         MatMenuModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
-    providers: []
+    providers: [
+        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000, verticalPosition: "top"}},
+        {provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}}
+    ]
 })
 export class AppMaterialModule { }

@@ -8,7 +8,7 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openEditDialog()">
+        <button mat-menu-item (click)="openEditDialog(post)">
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
         </button>
@@ -16,17 +16,14 @@
             <mat-icon>public</mat-icon>
             <span>Public</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onDelete(post)">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
         </button>
     </mat-menu>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-    <mat-card-content>
-        <p>
-        Leave a “YES” below if you agree👇When you fix your vision you’ll stop letting anyone break your heart. 
-        We try to fix our hearts and heal them instead of focusing on changing our vision.
-        </p>
+    <img mat-card-image [src]="post.imagePath">
+    <mat-card-content class="post-caption">
+        <p>{{post.caption}}</p>
     </mat-card-content>
     <mat-divider [inset]="true"></mat-divider>
     <mat-card-actions class="post-actions">

@@ -30,13 +30,7 @@ export class AuthService {
     return this.http.post(
       `${baseUrl}/signup`, user)
       .pipe(map(response => {
-        let user: AuthUser = {
-          username: response['username'],
-          token: response['token']
-        }
-        localStorage.setItem('usrname', user.username);
-        localStorage.setItem('token', user.token);
-        this.authUserSubject.next(user);
+        this.handleAuth(response);
 
         return response;
       }));
@@ -49,13 +43,7 @@ export class AuthService {
         password: password
       })
       .pipe(map(response => {
-        let user: AuthUser = {
-          username: response['username'],
-          token: response['token']
-        }
-        localStorage.setItem('usrname', user.username);
-        localStorage.setItem('token', user.token);
-        this.authUserSubject.next(user);
+        this.handleAuth(response);
         this.snackBar.open('Successfully logged in');
 
         return response;
@@ -68,5 +56,14 @@ export class AuthService {
     this.authUserSubject.next(null);
     this.snackBar.open('Successfully logged out');
     this.router.navigate(['/accounts/signin']);
+  }
+
+  private handleAuth(response) {
+    let user: AuthUser = {
+      username: response['username'],
+      token: response['token']
+    }
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.authUserSubject.next(user);
   }
 }

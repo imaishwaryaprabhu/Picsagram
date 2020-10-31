@@ -35,6 +35,10 @@ const userSchema = mongoose.Schema({
     minlength: 8,
     maxlength: 1024,
     required: true
+  },
+  profileImage: {
+    type: String, 
+    default: null
   }
 });
 

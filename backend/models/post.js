@@ -14,8 +14,9 @@ const postSchema = mongoose.Schema({
     ref: "User", 
     required: true 
   },
-  visibility: {
-    type: Boolean
+  public: {
+    type: Boolean,
+    default: false
   },
   likes: [{
     type: mongoose.Schema.Types.ObjectId, 
@@ -31,7 +32,11 @@ const postSchema = mongoose.Schema({
       type: String, 
       required: true 
     }
-  }]
+  }],
+  createdDateTime: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Post", postSchema);

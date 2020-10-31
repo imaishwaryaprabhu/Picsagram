@@ -51,8 +51,7 @@ export class AuthService {
   }
 
   signOut() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     this.authUserSubject.next(null);
     this.snackBar.open('Successfully logged out');
     this.router.navigate(['/accounts/signin']);
@@ -61,6 +60,7 @@ export class AuthService {
   private handleAuth(response) {
     let user: AuthUser = {
       username: response['username'],
+      profileImage: response['profileImage'],
       token: response['token']
     }
     localStorage.setItem('userData', JSON.stringify(user));

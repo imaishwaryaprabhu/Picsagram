@@ -39,7 +39,7 @@ exports.signInUser = async (req, res, next) => {
 
     delete user.password;
     const token = jwt.sign({ id: user._id, email: user.email }, 'privateKey');
-    res.send({ message: "User Logged in successfully", token: token, username: user.username });
+    res.send({ message: "User Logged in successfully", token: token, username: user.username, profileImage: user.profileImage });
   } catch (ex) {
       res.status(500).send({ message: "Internal server error" });
   }

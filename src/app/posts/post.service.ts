@@ -55,4 +55,20 @@ export class PostService {
     });
   }
 
+  changePostPrivacy(id:string, setPublic: boolean) {
+    return this.http.put<{message: string, post: Post}>(`${baseUrl}/${id}/changePrivacy`, { public: setPublic })
+    .pipe(map(response => {
+      this.getAll();
+
+      return response;
+    }));
+  }
+
+  likePost(id:string, like: boolean) {
+    return this.http.put<{message: string, post: Post}>(`${baseUrl}/${id}/like`, { like: like })
+    .subscribe(response => {
+      this.getAll();
+    });
+  }
+
 }

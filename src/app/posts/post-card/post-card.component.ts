@@ -21,18 +21,18 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openEditDialog(post: Post) {
+  openEditDialog() {
     const dialogRef = this.dialog.open(EditPostComponent, {
       width: "50%",
-      data: { post: post }
+      data: { post: this.post }
     });
 
     dialogRef.afterClosed().subscribe((updatedPost: Post) => {
-      post.caption = updatedPost.caption;
+      this.post.caption = updatedPost.caption;
     });
   }
 
-  onDelete(post: Post) {
+  onDelete() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: { 
         'title': "Confirm Deletion",
@@ -42,10 +42,37 @@ export class PostCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.postService.delete(post._id).subscribe(response => {
+        this.postService.delete(this.post._id).subscribe(response => {
           this.snackBar.open('Post deleted successfully');
         });
       }
     });
+  }
+
+  onChangePrivacy() {
+    if (!this.post.public) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: { 
+          'title': "Change Privacy?",
+          'question': "Anyone will be able to see your post."
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          this.postService.changePostPrivacy(this.post._id, !this.post.public).subscribe(response => {
+            this.snackBar.open('Post privacy changed');
+          });
+        }
+      });
+    } else {
+      this.postService.changePostPrivacy(this.post._id, !this.post.public).subscribe(response => {
+        this.snackBar.open('Post privacy changed');
+      });
+    }
+  }
+
+  onLike() {
+    this.postService.likePost(this.post._id, !this.post.likedByUser);
   }
 }

@@ -1,22 +1,28 @@
 <mat-card class="post">
     <mat-card-header>
         <div mat-card-avatar class="post-image"></div>
-        <mat-card-title>jayshetty</mat-card-title>
+        <mat-card-title>{{post.createdBy.username}}</mat-card-title>
         <mat-card-subtitle>12 mins ago</mat-card-subtitle>
     </mat-card-header>
     <button mat-icon-button [matMenuTriggerFor]="menu" class="post-action-btn">
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openEditDialog(post)">
+        <button mat-menu-item (click)="openEditDialog()">
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
         </button>
-        <button mat-menu-item>
-            <mat-icon>public</mat-icon>
-            <span>Public</span>
+        <button mat-menu-item (click)="onChangePrivacy()">
+            <ng-container *ngIf="post.public; else showPublic">
+                <mat-icon>public_off</mat-icon>
+                <span>Private</span>
+            </ng-container>
+            <ng-template #showPublic>
+                <mat-icon>public</mat-icon>
+                <span>Public</span>
+            </ng-template>
         </button>
-        <button mat-menu-item (click)="onDelete(post)">
+        <button mat-menu-item (click)="onDelete()">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
         </button>
@@ -27,12 +33,12 @@
     </mat-card-content>
     <mat-divider [inset]="true"></mat-divider>
     <mat-card-actions class="post-actions">
-        <button mat-button>
-        <mat-icon>favorite_border</mat-icon> Like
+        <button mat-button (click)="onLike()">
+            <mat-icon>{{post.likedByUser ? 'favorite' : 'favorite_border'}}</mat-icon> {{post.likes}} Likes
         </button>
         <span class="spacer"></span>
         <button mat-button>
-        <mat-icon>message</mat-icon> Comment
+            <mat-icon>message</mat-icon> {{post.comments}} Comments
         </button>
     </mat-card-actions>
 </mat-card>

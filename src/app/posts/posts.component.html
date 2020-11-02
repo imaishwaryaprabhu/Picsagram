@@ -7,7 +7,13 @@
 
 <!-- Posts -->
 <div class="grid-list">
-    <div class="grid-item" *ngFor="let post of posts">
-        <post-card [post]="post"></post-card>
+    <div class="grid-item" style="text-align: center; " *ngIf="posts.length == 0; else showPosts">
+        <mat-icon>announcement</mat-icon>
+        <h1>No Post Available!!</h1>
     </div>
+    <ng-template #showPosts>
+        <div class="grid-item" *ngFor="let post of posts">
+            <post-card [post]="post"></post-card>
+        </div>
+    </ng-template>
 </div>

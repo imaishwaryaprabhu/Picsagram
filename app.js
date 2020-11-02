@@ -13,6 +13,10 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/picsagram', { u
 app.use(express.json({ limit: '50mb', extended: false }));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
+let frontendDir = __dirname + '/frontend';
+app.use("/images/posts", express.static(__dirname + "/backend/images/posts"));
+app.use("/", express.static(frontendDir));
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -26,9 +30,6 @@ app.use((req, res, next) => {
   next();
 });
 
-let frontendDir = __dirname + '/frontend';
-app.use("/images/posts", express.static(__dirname + "/backend/images/posts"));
-app.use("/", express.static(frontendDir));
 app.use("/api/posts", postsRoutes);
 app.use("/api/users", userRoutes);
 app.all('*', (req, res) => {

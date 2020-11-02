@@ -27,8 +27,8 @@ app.use((req, res, next) => {
 });
 
 let frontendDir = __dirname + '/frontend';
-app.use(express.static(__dirname + '/frontend'));
 app.use("/images/posts", express.static(__dirname + "/backend/images/posts"));
+app.use("/", express.static(frontendDir));
 app.use("/api/posts", postsRoutes);
 app.use("/api/users", userRoutes);
 app.all('*', (req, res) => {

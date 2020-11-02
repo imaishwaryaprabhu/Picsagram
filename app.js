@@ -26,9 +26,14 @@ app.use((req, res, next) => {
   next();
 });
 
+let frontendDir = __dirname + '/frontend';
+app.use(express.static(__dirname + '/frontend'));
 app.use("/images/posts", express.static(__dirname + "/backend/images/posts"));
 app.use("/api/posts", postsRoutes);
 app.use("/api/users", userRoutes);
+app.all('*', (req, res) => {
+  res.status(200).sendFile(frontendDir + '/index.html')
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on http://localhost:${port}`));

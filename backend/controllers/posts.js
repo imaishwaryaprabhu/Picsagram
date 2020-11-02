@@ -17,7 +17,6 @@ exports.createPost = async (req, res, next) => {
       post: post
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ message: "Failed to create post." });
   }
 };
@@ -116,7 +115,7 @@ exports.getPosts = async (req, res, next) => {
     res.status(200).send({
         message: "Success",
         posts: posts,
-        totalCount: count[0].totalCount
+        totalCount: (count[0]) ? count[0].totalCount : 0
     });
   } catch (error) {
       res.status(500).send({ message: "Failed to fetch posts." });

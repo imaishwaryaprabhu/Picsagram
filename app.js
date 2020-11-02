@@ -6,7 +6,7 @@ const express = require("express");
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/picsagram', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/picsagram', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to mongodb database!"))
     .catch((err) => console.log("Failed to connect to mongodb databse", err));
 

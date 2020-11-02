@@ -3,7 +3,7 @@ import { AuthService } from '../accounts/auth.service';
 import { AuthUser } from '../accounts/auth-user.model';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-header',
